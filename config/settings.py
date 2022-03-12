@@ -57,7 +57,7 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
-ROOT_URLCONF = 'diploma.urls'
+ROOT_URLCONF = 'config.urls'
 
 TEMPLATES = [
     {
