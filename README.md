@@ -1,5 +1,9 @@
 # Diploma project
 
+https://it-bilim.herokuapp.com/
+https://it-bilim.herokuapp.com/admin/
+https://it-bilim.herokuapp.com/api/docs/
+
 ##  Instructions for use and launch app.
 
 1. Configure virtual environment settings
