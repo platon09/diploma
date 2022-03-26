@@ -1,10 +1,10 @@
 # Diploma project
 
-https://it-bilim.herokuapp.com/
+Base url: https://it-bilim.herokuapp.com/
 
-https://it-bilim.herokuapp.com/admin/
+Administration: https://it-bilim.herokuapp.com/admin/
 
-https://it-bilim.herokuapp.com/api/docs/
+API documentation: https://it-bilim.herokuapp.com/api/docs/
 
 ##  Instructions for use and launch app.
 
