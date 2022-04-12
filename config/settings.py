@@ -47,6 +47,7 @@ THIRD_PARTY_APPS = [
 LOCAL_APPS = [
     "local_apps.roadmaps.apps.RoadmapsConfig",
     "local_apps.users.apps.UsersConfig",
+    "local_apps.users.apps.RecommendationsConfig"
 ]
 
 INSTALLED_APPS = DJANGO_APPS + THIRD_PARTY_APPS + LOCAL_APPS
