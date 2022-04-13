@@ -26,7 +26,7 @@ SECRET_KEY = 'django-insecure-s0^bayp49sk@43ch)*8tgzx3-=a4wk1-0fsk($#6&i8*lm8l69
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['0.0.0.0', '127.0.0.1', '.herokuapp.com']
+ALLOWED_HOSTS = ['0.0.0.0', '127.0.0.1', '.herokuapp.com', 'localhost']
 
 
 # Application definition
@@ -47,7 +47,8 @@ THIRD_PARTY_APPS = [
 LOCAL_APPS = [
     "local_apps.roadmaps.apps.RoadmapsConfig",
     "local_apps.users.apps.UsersConfig",
-    "local_apps.recommendations.apps.RecommendationsConfig"
+    "local_apps.recommendations.apps.RecommendationsConfig",
+    "local_apps.vacancies.apps.VacanciesConfig",
 ]
 
 INSTALLED_APPS = DJANGO_APPS + THIRD_PARTY_APPS + LOCAL_APPS
