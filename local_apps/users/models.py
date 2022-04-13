@@ -21,3 +21,9 @@ class Customer(AbstractUser):
     @property
     def full_name(self):
         return f"{self.first_name}  {self.last_name}"
+
+class Skill(models.Model):
+    name = models.CharField(max_length=50)
+
+    def __str__(self):
+        return self.name
