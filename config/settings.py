@@ -47,7 +47,7 @@ THIRD_PARTY_APPS = [
 LOCAL_APPS = [
     "local_apps.roadmaps.apps.RoadmapsConfig",
     "local_apps.users.apps.UsersConfig",
-    "local_apps.users.apps.RecommendationsConfig"
+    "local_apps.recommendations.apps.RecommendationsConfig"
 ]
 
 INSTALLED_APPS = DJANGO_APPS + THIRD_PARTY_APPS + LOCAL_APPS
@@ -154,3 +154,8 @@ AUTH_USER_MODEL = 'users.Customer'
 STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+MEDIA_URL = '/media/'
+
+BACKEND_URL = 'http://localhost:8000'
