@@ -1,4 +1,5 @@
 from django.db import models
+from local_apps.users.models import Skill
 
 
 # Class model for IT specialization
@@ -20,6 +21,7 @@ class Section(models.Model):
     specialization = models.ManyToManyField(Specialization, related_name='sections')
     name = models.CharField(max_length=200)
     slug = models.SlugField(max_length=200)
+    skill = models.ManyToManyField(Skill, blank=True)
 
     class Meta:
         ordering = ('name',)
