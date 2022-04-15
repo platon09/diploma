@@ -1,12 +1,25 @@
 from django.db import models
 from django.contrib.auth.models import AbstractUser
+from config.settings import BACKEND_URL
+from django.utils.safestring import mark_safe
 from django.utils.translation import gettext_lazy as _
 
 from .managers import CustomUserManager
 
 
+class Skill(models.Model):
+    name = models.CharField(max_length=50)
+
+    def __str__(self):
+        return self.name
+
+
 class Customer(AbstractUser):
     email = models.EmailField(_('email address'), unique=True)
+    bio = models.CharField(max_length=100, blank=True)
+    info = models.TextField(blank=True)
+    image = models.ImageField(upload_to='customer/images/', null=True, blank=True)
+    skill = models.ManyToManyField(Skill, blank=True)
     last_login = models.DateTimeField(verbose_name='last login', auto_now=True)
     username = None
 
@@ -15,6 +28,10 @@ class Customer(AbstractUser):
 
     objects = CustomUserManager()
 
+    class Meta:
+        verbose_name_plural = 'Customers'
+        ordering = ['-date_joined']
+
     def __str__(self):
         return self.email
 
@@ -22,8 +39,13 @@ class Customer(AbstractUser):
     def full_name(self):
         return f"{self.first_name}  {self.last_name}"
 
-class Skill(models.Model):
-    name = models.CharField(max_length=50)
+    @property
+    def image_tag(self):
+        try:
+            return mark_safe(f'<img src="{self.image.url}" />')
+        except:
+            return 'None'
 
-    def __str__(self):
-        return self.name
+    @property
+    def image_url(self):
+        return BACKEND_URL + self.image.url
