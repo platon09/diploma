@@ -34,7 +34,9 @@ class Vacancy(models.Model):
     title = models.CharField(max_length=140)
     created_on = models.DateTimeField(auto_now_add=True)
     description = models.TextField()
-    salary = models.FloatField()
+    min_salary = models.FloatField(null=True, blank=True)
+    salary = models.FloatField(null=True, blank=True)
+    max_salary = models.FloatField(null=True, blank=True)
     image = models.ImageField(upload_to='vacancies/images/', null=True, blank=True)
     employment_type = models.CharField(max_length=15, choices=EMPLOYMENT_TYPE_CHOICES, default="INTERNSHIP")
     schedule = models.CharField(max_length=15, choices=SCHEDULE_CHOICES, default="FULL_DAY")
@@ -48,6 +50,19 @@ class Vacancy(models.Model):
 
     def __str__(self):
         return self.title
+
+    @property
+    def final_salary(self):
+        if self.salary:
+            return f"{self.salary} теңге"
+        elif self.min_salary and self.max_salary:
+            return f"{self.min_salary} теңге - {self.max_salary} теңге аралығы"
+        elif self.min_salary:
+            return f"{self.min_salary} теңгеден бастап"
+        elif self.max_salary:
+            return f"{self.max_salary} теңгеге дейін"
+        else:
+            return "Жалақы көрсетілмеген"
 
     @property
     def image_tag(self):
