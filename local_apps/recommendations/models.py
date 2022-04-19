@@ -19,7 +19,7 @@ class Recommendation(models.Model):
     @property
     def image_tag(self):
         try:
-            return mark_safe(f'<img src="{self.image.url}" />')
+            return mark_safe(f'<img src="{self.image.url}" style="width: 10%; height: auto;"/>')
         except:
             return 'None'
 
