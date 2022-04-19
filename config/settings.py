@@ -27,7 +27,7 @@ SECRET_KEY = 'django-insecure-s0^bayp49sk@43ch)*8tgzx3-=a4wk1-0fsk($#6&i8*lm8l69
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['0.0.0.0', '127.0.0.1', '.herokuapp.com', 'localhost', 'it-bilim.herokuapp.com',]
+ALLOWED_HOSTS = ['0.0.0.0', '127.0.0.1', '.herokuapp.com', 'localhost', 'it-bilim.herokuapp.com', ]
 
 
 # Application definition
@@ -193,5 +193,5 @@ STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 MEDIA_URL = '/media/'
 
-BACKEND_URL = 'http://localhost:8000'
-# BACKEND_URL = 'https://it-bilim.herokuapp.com'
+# BACKEND_URL = 'http://localhost:8000'
+BACKEND_URL = 'https://it-bilim.herokuapp.com'

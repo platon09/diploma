@@ -8,7 +8,6 @@ from rest_framework.exceptions import ValidationError
 from rest_framework.response import Response
 
 
-
 class VacancyListView(ListAPIView):
     queryset = Vacancy.objects.all()
     serializer_class = VacancySerializer

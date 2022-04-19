@@ -3,7 +3,6 @@ import json
 from rest_framework.generics import ListAPIView
 from rest_framework.views import APIView
 from rest_framework.permissions import IsAuthenticated
-from rest_framework.exceptions import ValidationError
 from rest_framework.response import Response
 
 from local_apps.roadmaps.models import Techstack, Technology

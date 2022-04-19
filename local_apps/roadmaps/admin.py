@@ -31,6 +31,8 @@ class SubtopicAdmin(admin.ModelAdmin):
     list_display = ('name', 'type')
     list_filter = (('type', RelatedOnlyFieldListFilter), ('topics', RelatedOnlyFieldListFilter))
 
+
 @admin.register(MaterialType)
 class MaterialTypeAdmin(admin.ModelAdmin):
     list_display = ('name',)
+    

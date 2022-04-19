@@ -11,6 +11,8 @@ class SkillSerializer(serializers.ModelSerializer):
 
 class VacancySerializer(serializers.ModelSerializer):
     skill = SkillSerializer(many=True)
+
     class Meta:
         model = Vacancy
-        fields = ['id', 'title', 'created_on', 'description', 'final_salary', 'image_url', 'employment_type', 'schedule', 'specialization', 'location', 'skill']
+        fields = ['id', 'title', 'created_on', 'description', 'final_salary', 'image_url',
+                  'employment_type', 'schedule', 'specialization', 'location', 'skill']

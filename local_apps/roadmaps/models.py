@@ -1,6 +1,7 @@
 from django.db import models
 from local_apps.users.models import Skill
 
+
 # Class model for determine content type of sub topic
 class MaterialType(models.Model):
     name = models.CharField(max_length=200)
@@ -40,7 +41,9 @@ class Topic(models.Model):
     slug = models.SlugField(max_length=200)
     description = models.TextField(blank=True)
     is_learned = models.BooleanField(default=False)
-    technology = models.ForeignKey(Technology, related_name='topics', on_delete=models.SET_DEFAULT, default=None, null=True, blank=True)
+    technology = models.ForeignKey(Technology, related_name='topics',
+                                   on_delete=models.SET_DEFAULT, default=None,
+                                   null=True, blank=True)
 
     class Meta:
         ordering = ('name',)
@@ -81,10 +84,13 @@ class Specialization(models.Model):
     def __str__(self):
         return self.name
 
+
 # Class model for tech stack of IT specialization
 class Techstack(models.Model):
     technology = models.ManyToManyField(Technology, related_name='techstacks')
-    specialization = models.ForeignKey(Specialization, related_name='techstacks', on_delete=models.SET_DEFAULT, default=None, null=True, blank=True)
+    specialization = models.ForeignKey(Specialization, related_name='techstacks',
+                                       on_delete=models.SET_DEFAULT, default=None,
+                                       null=True, blank=True)
 
     class Meta:
         verbose_name = 'Tech stack'

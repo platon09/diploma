@@ -13,10 +13,8 @@ class SubTopicListView(ListAPIView):
         product_qs = Subtopic.objects.filter(topics__slug=self.kwargs['topic_slug'])
         return product_qs
 
-
     def list(self, request, *args, **kwargs):
-        topic = Topic.objects.filter(slug=kwargs['topic_slug'],
-                                       section__slug=kwargs['section_slug'])
+        topic = Topic.objects.filter(slug=kwargs['topic_slug'], section__slug=kwargs['section_slug'])
         if not topic:
             raise ValidationError(detail='Topic is not found', code=400)
 

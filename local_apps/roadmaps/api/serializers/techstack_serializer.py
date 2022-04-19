@@ -5,4 +5,5 @@ from local_apps.roadmaps.models import Techstack
 class TechstackSerializer(serializers.ModelSerializer):
     class Meta:
         model = Techstack
-        fields = ['id', 'techstack_name']
+        fields = ['id', 'techstack_name', ]
+        
