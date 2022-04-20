@@ -1,6 +1,6 @@
 from django.contrib import admin
 from django.contrib.admin.filters import RelatedOnlyFieldListFilter
-from .models import Specialization, Techstack, Technology, Topic, Subtopic, MaterialType
+from .models import Specialization, Techstack, Technology, Topic, Subtopic, MaterialType, UserStudy
 
 
 @admin.register(Specialization)
@@ -35,4 +35,9 @@ class SubtopicAdmin(admin.ModelAdmin):
 @admin.register(MaterialType)
 class MaterialTypeAdmin(admin.ModelAdmin):
     list_display = ('name',)
-    
+
+
+@admin.register(UserStudy)
+class UserStudyAdmin(admin.ModelAdmin):
+    list_display = ('technology', 'progress', 'user')
+    list_filter = (('technology', RelatedOnlyFieldListFilter), ('user', RelatedOnlyFieldListFilter))
