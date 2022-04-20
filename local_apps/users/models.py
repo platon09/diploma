@@ -6,6 +6,8 @@ from django.utils.translation import gettext_lazy as _
 
 from .managers import CustomUserManager
 
+from local_apps.roadmaps.models import Technology
+
 
 class Skill(models.Model):
     name = models.CharField(max_length=50)
@@ -49,3 +51,9 @@ class Customer(AbstractUser):
     @property
     def image_url(self):
         return BACKEND_URL + self.image.url
+
+
+class UserStudy(models.Model):
+    technology = models.OneToOneField(Technology, on_delete=models.CASCADE)
+    progress = models.FloatField(default=0)
+    user = models.ForeignKey(Customer, related_name='userstudies', on_delete=models.CASCADE)
