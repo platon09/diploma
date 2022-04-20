@@ -1,5 +1,5 @@
 from django.db import models
-from local_apps.users.models import Skill
+from local_apps.users.models import Skill, Customer
 
 
 # Class model for determine content type of sub topic
@@ -102,3 +102,9 @@ class Techstack(models.Model):
 
     def __str__(self):
         return ' + '.join(self.technology.all().values_list('name', flat=True))
+
+
+class UserStudy(models.Model):
+    technology = models.OneToOneField(Technology, on_delete=models.CASCADE)
+    progress = models.FloatField(default=0)
+    user = models.ForeignKey(Customer, related_name='userstudies', on_delete=models.CASCADE)
