@@ -1,5 +1,12 @@
 from django.db import models
-from local_apps.users.models import Image
+from config.settings import BACKEND_URL
+
+
+class Image(models.Model):
+    photo = models.ImageField(upload_to='images/', blank=True)
+
+    def __str__(self):
+        return BACKEND_URL+self.photo.url
 
 
 class Recommendation(models.Model):
