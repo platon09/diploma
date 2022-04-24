@@ -14,11 +14,26 @@ class Skill(models.Model):
         return self.name
 
 
+class Image(models.Model):
+    photo = models.ImageField(upload_to='images/', null=True, blank=True)
+
+    @property
+    def image_tag(self):
+        try:
+            return mark_safe(f'<img src="{self.photo.url}" style="width: 10%; height: auto;"/>')
+        except:
+            return 'None'
+
+    @property
+    def image_url(self):
+        return BACKEND_URL + self.photo.url
+
+
 class Customer(AbstractUser):
     email = models.EmailField(_('email address'), unique=True)
     bio = models.CharField(max_length=100, blank=True)
     info = models.TextField(blank=True)
-    image = models.ImageField(upload_to='customer/images/', null=True, blank=True)
+    image = models.OneToOneField(Image, on_delete=models.SET_NULL, null=True, blank=True)
     skill = models.ManyToManyField(Skill, blank=True)
     last_login = models.DateTimeField(verbose_name='last login', auto_now=True)
     username = None
@@ -38,14 +53,3 @@ class Customer(AbstractUser):
     @property
     def full_name(self):
         return f"{self.first_name}  {self.last_name}"
-
-    @property
-    def image_tag(self):
-        try:
-            return mark_safe(f'<img src="{self.image.url}" />')
-        except:
-            return 'None'
-
-    @property
-    def image_url(self):
-        return BACKEND_URL + self.image.url

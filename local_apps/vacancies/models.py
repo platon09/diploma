@@ -1,7 +1,5 @@
 from django.db import models
-from local_apps.users.models import Skill
-from config.settings import BACKEND_URL
-from django.utils.safestring import mark_safe
+from local_apps.users.models import Skill, Image
 
 
 class Vacancy(models.Model):
@@ -37,7 +35,7 @@ class Vacancy(models.Model):
     min_salary = models.FloatField(null=True, blank=True)
     salary = models.FloatField(null=True, blank=True)
     max_salary = models.FloatField(null=True, blank=True)
-    image = models.ImageField(upload_to='vacancies/images/', null=True, blank=True)
+    image = models.OneToOneField(Image, on_delete=models.SET_NULL, null=True, blank=True)
     employment_type = models.CharField(max_length=15, choices=EMPLOYMENT_TYPE_CHOICES, default="INTERNSHIP")
     schedule = models.CharField(max_length=15, choices=SCHEDULE_CHOICES, default="FULL_DAY")
     specialization = models.CharField(max_length=20, choices=SPEC_CHOICES, default="BACK_END")
@@ -63,17 +61,3 @@ class Vacancy(models.Model):
             return f"{self.max_salary} теңгеге дейін"
         else:
             return "Жалақы көрсетілмеген"
-
-    @property
-    def image_tag(self):
-        try:
-            return mark_safe(f'<img src="{self.image.url}" />')
-        except:
-            return 'None'
-
-    @property
-    def image_url(self):
-        if self.image:
-            return BACKEND_URL + self.image.url
-        else:
-            'None'
