@@ -33,6 +33,7 @@ class Vacancy(models.Model):
     )
     title = models.CharField(max_length=140)
     created_on = models.DateTimeField(auto_now_add=True)
+    employer = models.CharField(max_length=50)
     description = models.TextField()
     min_salary = models.FloatField(null=True, blank=True)
     salary = models.FloatField(null=True, blank=True)
