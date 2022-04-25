@@ -5,39 +5,34 @@ from .models import Specialization, Techstack, Technology, Topic, Subtopic, Mate
 
 @admin.register(Specialization)
 class SpecializationAdmin(admin.ModelAdmin):
-    list_display = ('name',)
+    pass
 
 
 @admin.register(Techstack)
 class TechstackAdmin(admin.ModelAdmin):
-    list_display = ('techstack_name', 'specialization')
-    list_filter = (('specialization', RelatedOnlyFieldListFilter), ('technology', RelatedOnlyFieldListFilter))
+    pass
 
 
 @admin.register(Technology)
 class TechnologyAdmin(admin.ModelAdmin):
-    list_display = ('name', 'skills')
-    list_filter = (('skill', RelatedOnlyFieldListFilter),)
+    pass
 
 
 @admin.register(Topic)
 class TopicAdmin(admin.ModelAdmin):
-    list_display = ('name', 'technology')
-    list_filter = (('technology', RelatedOnlyFieldListFilter),)
+    pass
 
 
 @admin.register(Subtopic)
 class SubtopicAdmin(admin.ModelAdmin):
-    list_display = ('name', 'type')
-    list_filter = (('type', RelatedOnlyFieldListFilter), ('topics', RelatedOnlyFieldListFilter))
+    pass
 
 
 @admin.register(MaterialType)
 class MaterialTypeAdmin(admin.ModelAdmin):
-    list_display = ('name',)
+    pass
 
 
 @admin.register(UserStudy)
 class UserStudyAdmin(admin.ModelAdmin):
-    list_display = ('technology', 'progress', 'user')
-    list_filter = (('technology', RelatedOnlyFieldListFilter), ('user', RelatedOnlyFieldListFilter))
+    pass
