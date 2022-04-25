@@ -7,17 +7,14 @@ from local_apps.roadmaps.api.views.topic_view import TopicListView, TopicDetailV
 
 urlpatterns = [
     path('', SpecializationListView.as_view()),
-    path('<slug:spec_slug>/', include([
+    path('<int:id>/', include([
         path('', TechstackListView.as_view()),
-        path('<int:pk>/', include([
-            path('', TechnologyListView.as_view()),
-            path('<slug:tech_slug>/', include([
-                path('', TopicListView.as_view()),
-                path('done/', RecordProgressView.as_view()),
-                path('<slug:topic_slug>/', include([
-                    path('', TopicDetailView.as_view())
-                ])),
-            ]))
+        path('<int:id>/', include([
+            path('', TopicListView.as_view()),
+            path('done/', RecordProgressView.as_view()),
+            path('<slug:topic_slug>/', include([
+                path('', TopicDetailView.as_view())
+            ])),
         ])),
     ])),
 ]
