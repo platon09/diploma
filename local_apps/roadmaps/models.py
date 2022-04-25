@@ -15,12 +15,42 @@ class MaterialType(models.Model):
         return self.name
 
 
+# Class model for sub topic of topic
+class Subtopic(models.Model):
+    name = models.CharField(max_length=200)
+    link = models.URLField(max_length=300)
+    type = models.ForeignKey(MaterialType, related_name='subtopics', on_delete=models.SET_DEFAULT, default='read')
+
+    class Meta:
+        ordering = ('name',)
+        verbose_name = 'Subtopic'
+        verbose_name_plural = 'Subtopics'
+
+    def __str__(self):
+        return self.name
+
+
+# Class model for topic of technology
+class Topic(models.Model):
+    name = models.CharField(max_length=200)
+    description = models.TextField(blank=True)
+    subtopics = models.ManyToManyField(Subtopic, related_name='topics')
+
+    class Meta:
+        ordering = ('name',)
+        verbose_name = 'Topic'
+        verbose_name_plural = 'Topics'
+
+    def __str__(self):
+        return self.name
+
+
 # Class model for technology of tech stack
 class Technology(models.Model):
     name = models.CharField(max_length=200)
     description = models.TextField(blank=True)
-    slug = models.SlugField(max_length=200)
     skill = models.ManyToManyField(Skill, blank=True)
+    topics = models.ManyToManyField(Topic, related_name='technologies')
 
     class Meta:
         ordering = ('name',)
@@ -35,62 +65,9 @@ class Technology(models.Model):
         return self.name
 
 
-# Class model for topic of technology
-class Topic(models.Model):
-    name = models.CharField(max_length=200)
-    slug = models.SlugField(max_length=200)
-    description = models.TextField(blank=True)
-    is_learned = models.BooleanField(default=False)
-    technology = models.ForeignKey(Technology, related_name='topics',
-                                   on_delete=models.SET_DEFAULT, default=None,
-                                   null=True, blank=True)
-
-    class Meta:
-        ordering = ('name',)
-        verbose_name = 'Topic'
-        verbose_name_plural = 'Topics'
-
-    def __str__(self):
-        return self.name
-
-
-# Class model for sub topic of topic
-class Subtopic(models.Model):
-    name = models.CharField(max_length=200)
-    link = models.URLField(max_length=300)
-    type = models.ForeignKey(MaterialType, related_name='subtopics', on_delete=models.SET_DEFAULT, default='read')
-    topics = models.ManyToManyField(Topic, related_name='topics', blank=True)
-
-    class Meta:
-        ordering = ('name',)
-        verbose_name = 'Subtopic'
-        verbose_name_plural = 'Subtopics'
-
-    def __str__(self):
-        return self.name
-
-
-# Class model for IT specialization
-class Specialization(models.Model):
-    name = models.CharField(max_length=200)
-    slug = models.SlugField(max_length=200)
-    description = models.TextField(blank=True)
-
-    class Meta:
-        ordering = ('name',)
-        verbose_name = 'IT specialization'
-        verbose_name_plural = 'IT specializations'
-
-    def __str__(self):
-        return self.name
-
-
 # Class model for tech stack of IT specialization
 class Techstack(models.Model):
     technology = models.ManyToManyField(Technology, related_name='techstacks')
-    specialization = models.ForeignKey(Specialization, related_name='techstacks',
-                                       on_delete=models.SET_DEFAULT, default=None,
-                                       null=True, blank=True)
 
     class Meta:
         verbose_name = 'Tech stack'
@@ -102,6 +79,21 @@ class Techstack(models.Model):
 
     def __str__(self):
         return ' + '.join(self.technology.all().values_list('name', flat=True))
+
+
+# Class model for IT specialization
+class Specialization(models.Model):
+    name = models.CharField(max_length=200)
+    description = models.TextField(blank=True)
+    techstacks = models.ManyToManyField(Techstack, related_name='specs')
+
+    class Meta:
+        ordering = ('name',)
+        verbose_name = 'IT specialization'
+        verbose_name_plural = 'IT specializations'
+
+    def __str__(self):
+        return self.name
 
 
 class UserStudy(models.Model):
