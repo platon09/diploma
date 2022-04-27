@@ -13,17 +13,17 @@ class TopicDetailSerializer(serializers.ModelSerializer):
 
     def get_subtopic(self, obj):
         out = []
-        subtopics = Subtopic.objects.filter(topics__slug=obj.slug)
+        subtopics = obj.subtopics.all()
         for item in subtopics:
             out.append(SubTopicSerializer(item).data)
         return out
 
     class Meta:
         model = Topic
-        fields = ['id', 'name', 'slug', 'description', 'is_learned', 'subtopic']
+        fields = ['id', 'name', 'description', 'subtopic']
 
 
 class TopicSerializer(serializers.ModelSerializer):
     class Meta:
         model = Topic
-        fields = ['id', 'name', 'slug', 'description', 'is_learned']
+        fields = ['id', 'name', 'description', ]

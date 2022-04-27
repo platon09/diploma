@@ -1,6 +1,6 @@
 from rest_framework.generics import ListAPIView, RetrieveAPIView
 
-from local_apps.roadmaps.models import Topic, Techstack, Technology
+from local_apps.roadmaps.models import Topic, Technology
 from local_apps.roadmaps.api.serializers.topic_serializer import TopicDetailSerializer, TopicSerializer
 
 
@@ -9,7 +9,7 @@ class TopicDetailView(RetrieveAPIView):
     queryset = ''
 
     def get_object(self):
-        topic = Topic.objects.get(slug=self.kwargs['topic_slug'])
+        topic = Topic.objects.get(id=self.kwargs['id'])
         return topic
 
 
@@ -17,6 +17,5 @@ class TopicListView(ListAPIView):
     serializer_class = TopicSerializer
 
     def get_queryset(self):
-        topics__ids = Techstack.objects.get(id=self.kwargs['id']).technology.all().prefetch_related('topics').values_list('topics__id', flat=True)
-        topic_qs = Topic.objects.filter(technology__slug=self.kwargs['tech_slug'])
+        topic_qs = Technology.objects.get(id=self.kwargs['id']).topics.all()
         return topic_qs

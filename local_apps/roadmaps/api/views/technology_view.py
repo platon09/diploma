@@ -5,7 +5,7 @@ from rest_framework.views import APIView
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
 
-from local_apps.roadmaps.models import Techstack, Topic, UserStudy
+from local_apps.roadmaps.models import Specialization, Topic, UserStudy
 from local_apps.roadmaps.api.serializers.technology_serializer import TechnologySerializer
 
 
@@ -13,8 +13,8 @@ class TechnologyListView(ListAPIView):
     serializer_class = TechnologySerializer
 
     def get_queryset(self):
-        pk = self.kwargs['pk']
-        technology_qs = Techstack.objects.get(id=pk).technology.all()
+        pk = self.kwargs['id']
+        technology_qs = Specialization.objects.get(id=pk).technologies.all()
         return technology_qs
 
 
