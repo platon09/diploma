@@ -36,6 +36,7 @@ class Vacancy(models.Model):
     created_on = models.DateTimeField(auto_now_add=True)
     employer = models.CharField(max_length=50, blank=True)
     description = RichTextField(blank=True)
+    link = models.URLField(blank=True)
     min_salary = models.FloatField(null=True, blank=True)
     salary = models.FloatField(null=True, blank=True)
     max_salary = models.FloatField(null=True, blank=True)
