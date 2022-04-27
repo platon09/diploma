@@ -1,10 +1,15 @@
 from django.contrib import admin
 from django.contrib.admin.filters import RelatedOnlyFieldListFilter
-from .models import Specialization, Technology, Topic, Subtopic, MaterialType, UserStudy
+from .models import Specialization, Techstack, Technology, Topic, Subtopic, MaterialType, UserStudy
 
 
 @admin.register(Specialization)
 class SpecializationAdmin(admin.ModelAdmin):
+    pass
+
+
+@admin.register(Techstack)
+class TechstackAdmin(admin.ModelAdmin):
     pass
 
 

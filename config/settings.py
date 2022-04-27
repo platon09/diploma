@@ -44,7 +44,6 @@ THIRD_PARTY_APPS = [
     'rest_framework',
     'whitenoise.runserver_nostatic',
     'rest_framework_simplejwt',
-    'ckeditor',
 ]
 
 LOCAL_APPS = [
