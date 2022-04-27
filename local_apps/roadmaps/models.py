@@ -66,22 +66,6 @@ class Technology(models.Model):
         return self.name
 
 
-# Class model for tech stack of IT specialization
-class Techstack(models.Model):
-    technology = models.ManyToManyField(Technology, related_name='techstacks')
-
-    class Meta:
-        verbose_name = 'Tech stack'
-        verbose_name_plural = 'Tech stacks'
-
-    @property
-    def techstack_name(self):
-        return ' + '.join(self.technology.all().values_list('name', flat=True))
-
-    def __str__(self):
-        return ' + '.join(self.technology.all().values_list('name', flat=True))
-
-
 # Class model for IT specialization
 class Specialization(models.Model):
     name = models.CharField(max_length=200)
