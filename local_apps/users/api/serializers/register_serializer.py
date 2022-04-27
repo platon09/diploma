@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from local_apps.users.models import Customer, Skill
+from local_apps.users.models import Customer
 
 
 class RegisterSerializer(serializers.ModelSerializer):
@@ -16,24 +16,8 @@ class RegisterSerializer(serializers.ModelSerializer):
         return user
 
 
-# Skill serializer
-class SkillSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = Skill
-        fields = '__all__'
-
-
 # User serializer
 class UserSerializer(serializers.ModelSerializer):
-    skills = serializers.SerializerMethodField('get_skills_names')
-
-    def get_skills_names(self, obj):
-        out = []
-        skills = obj.skill.all()
-        for item in skills:
-            out.append(SkillSerializer(item).data)
-        return out
-
     class Meta:
         model = Customer
-        fields = ('id', 'first_name', 'last_name', 'email', 'bio', 'info', 'image_url', 'skills')
+        fields = '__all__'
