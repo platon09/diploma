@@ -1,4 +1,5 @@
 from django.db import models
+from ckeditor.fields import RichTextField
 from local_apps.users.models import Skill, Customer
 
 
@@ -33,7 +34,7 @@ class Subtopic(models.Model):
 # Class model for topic of technology
 class Topic(models.Model):
     name = models.CharField(max_length=200)
-    description = models.TextField(blank=True)
+    description = RichTextField(blank=True)
     subtopics = models.ManyToManyField(Subtopic, related_name='topics')
 
     class Meta:
@@ -48,7 +49,7 @@ class Topic(models.Model):
 # Class model for technology of tech stack
 class Technology(models.Model):
     name = models.CharField(max_length=200)
-    description = models.TextField(blank=True)
+    description = RichTextField(blank=True)
     skill = models.ManyToManyField(Skill, blank=True)
     topics = models.ManyToManyField(Topic, related_name='technologies')
 
@@ -84,8 +85,8 @@ class Techstack(models.Model):
 # Class model for IT specialization
 class Specialization(models.Model):
     name = models.CharField(max_length=200)
-    description = models.TextField(blank=True)
-    techstacks = models.ManyToManyField(Techstack, related_name='specs')
+    description = RichTextField(blank=True)
+    technologies = models.ManyToManyField(Technology, related_name='specs')
 
     class Meta:
         ordering = ('name',)

@@ -1,4 +1,5 @@
 from django.db import models
+from ckeditor.fields import RichTextField
 from config.settings import BACKEND_URL
 from django.utils.safestring import mark_safe
 
@@ -33,7 +34,7 @@ class Image(models.Model):
 
 class Recommendation(models.Model):
     title = models.CharField(max_length=140)
-    body = models.TextField()
+    body = RichTextField(blank=True)
     created_on = models.DateTimeField(auto_now_add=True)
     images = models.ManyToManyField(Image, blank=True)
 
