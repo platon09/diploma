@@ -9,7 +9,7 @@ class TopicDetailView(RetrieveAPIView):
     queryset = ''
 
     def get_object(self):
-        topic = Topic.objects.get(id=self.kwargs['id'])
+        topic = Topic.objects.get(id=self.kwargs['topic_id'])
         return topic
 
 
@@ -17,5 +17,5 @@ class TopicListView(ListAPIView):
     serializer_class = TopicSerializer
 
     def get_queryset(self):
-        topic_qs = Technology.objects.get(id=self.kwargs['id']).topics.all()
+        topic_qs = Technology.objects.get(id=self.kwargs['tech_id']).topics.all()
         return topic_qs
