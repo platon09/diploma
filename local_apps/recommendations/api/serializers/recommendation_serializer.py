@@ -20,4 +20,4 @@ class RecommendationSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Recommendation
-        fields = ['id', 'title', 'body', 'created_on', 'pics']
+        fields = ['id', 'title', 'body', 'link', 'created_on', 'pics']
