@@ -195,4 +195,4 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 MEDIA_URL = '/media/'
 
 # BACKEND_URL = 'http://localhost:8000'
-BACKEND_URL = 'https://it-bilim.herokuapp.com'
+BACKEND_URL = 'https://demo-it-bilim.herokuapp.com'
