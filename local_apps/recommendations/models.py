@@ -34,6 +34,7 @@ class Image(models.Model):
 class Recommendation(models.Model):
     title = models.CharField(max_length=140)
     body = models.TextField(blank=True)
+    link = models.URLField(blank=True)
     created_on = models.DateTimeField(auto_now_add=True)
     images = models.ManyToManyField(Image, blank=True)
 
