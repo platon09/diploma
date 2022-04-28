@@ -1,5 +1,4 @@
 from django.db import models
-from ckeditor.fields import RichTextField
 from django.contrib.auth.models import AbstractUser
 from config.settings import BACKEND_URL
 from django.utils.safestring import mark_safe
@@ -18,7 +17,7 @@ class Skill(models.Model):
 class Customer(AbstractUser):
     email = models.EmailField(_('email address'), unique=True)
     bio = models.CharField(max_length=100, blank=True)
-    info = RichTextField(blank=True)
+    info = models.TextField(blank=True)
     image = models.ImageField(upload_to='customers/', null=True, blank=True)
     skill = models.ManyToManyField(Skill, blank=True)
     last_login = models.DateTimeField(verbose_name='last login', auto_now=True)
