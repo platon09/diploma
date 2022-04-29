@@ -75,4 +75,7 @@ class Vacancy(models.Model):
 
     @property
     def image_url(self):
-        return BACKEND_URL + self.image.url
+        try:
+            return BACKEND_URL + self.image.url
+        except:
+            return 'None'
