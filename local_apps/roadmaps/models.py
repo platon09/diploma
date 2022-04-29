@@ -29,6 +29,9 @@ class Subtopic(models.Model):
     def __str__(self):
         return self.name
 
+    def type_name(self):
+        return self.type.name
+
 
 # Class model for topic of technology
 class Topic(models.Model):

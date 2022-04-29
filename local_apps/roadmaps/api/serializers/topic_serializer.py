@@ -5,7 +5,7 @@ from local_apps.roadmaps.models import Topic, Subtopic
 class SubTopicSerializer(serializers.ModelSerializer):
     class Meta:
         model = Subtopic
-        fields = ['name', 'link', 'type']
+        fields = ['name', 'link', 'type_name']
 
 
 class TopicDetailSerializer(serializers.ModelSerializer):
