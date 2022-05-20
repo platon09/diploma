@@ -26,7 +26,7 @@ SECRET_KEY = 'django-insecure-s0^bayp49sk@43ch)*8tgzx3-=a4wk1-0fsk($#6&i8*lm8l69
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['0.0.0.0', '127.0.0.1', 'localhost', ]
+ALLOWED_HOSTS = ['server.it-bilim.kz', '86.107.199.190', '0.0.0.0', '127.0.0.1', 'localhost', ]
 
 
 # Application definition
@@ -180,6 +180,9 @@ SIMPLE_JWT = {
     'SLIDING_TOKEN_REFRESH_LIFETIME': timedelta(days=1),
 }
 
+STATIC_URL = '/static/'
+import os
+STATIC_ROOT = os.path.join(BASE_DIR, 'static/')
 
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 MEDIA_URL = '/media/'
