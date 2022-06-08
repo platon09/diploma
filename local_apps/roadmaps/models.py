@@ -38,6 +38,7 @@ class Topic(models.Model):
     name = models.CharField(max_length=200)
     description = models.TextField(blank=True)
     subtopics = models.ManyToManyField(Subtopic, related_name='topics')
+    image = models.ImageField(upload_to='topics/', null=True, blank=True)
 
     class Meta:
         ordering = ('name',)
