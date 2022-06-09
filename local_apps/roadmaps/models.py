@@ -1,5 +1,6 @@
 from django.db import models
 from local_apps.users.models import Skill, Customer
+from config.settings import BACKEND_URL
 
 
 # Class model for determine content type of sub topic
@@ -47,6 +48,13 @@ class Topic(models.Model):
 
     def __str__(self):
         return self.name
+
+    @property
+    def image_url(self):
+        try:
+            return BACKEND_URL + self.image.url
+        except:
+            return 'None'
 
 
 # Class model for technology of tech stack
