@@ -20,10 +20,16 @@ class TopicDetailSerializer(serializers.ModelSerializer):
         return out
 
     def checker_for_done(self, obj):
-        if obj.user_studies.all().count() > 0:
-            return True
-        else:
+        user = self.context.get('request').user
+        is_anonymous = user.is_anonymous
+
+        if is_anonymous:
             return False
+        else:
+            if obj.user_studies.filter(user=user).count() > 0:
+                return True
+            else:
+                return False
 
     class Meta:
         model = Topic
@@ -34,10 +40,16 @@ class TopicSerializer(serializers.ModelSerializer):
     is_done = serializers.SerializerMethodField(method_name='checker_for_done')
 
     def checker_for_done(self, obj):
-        if obj.user_studies.all().count() > 0:
-            return True
-        else:
+        user = self.context.get('request').user
+        is_anonymous = user.is_anonymous
+
+        if is_anonymous:
             return False
+        else:
+            if obj.user_studies.filter(user=user).count() > 0:
+                return True
+            else:
+                return False
 
     class Meta:
         model = Topic
