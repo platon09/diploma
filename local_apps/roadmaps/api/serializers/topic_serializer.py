@@ -1,11 +1,6 @@
 from rest_framework import serializers
-from local_apps.roadmaps.models import Topic, Subtopic
-
-
-class SubTopicSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = Subtopic
-        fields = ['name', 'link', 'type_name']
+from local_apps.roadmaps.models import Topic
+from local_apps.roadmaps.api.serializers.subtopic_serializer import SubTopicSerializer
 
 
 class TopicDetailSerializer(serializers.ModelSerializer):
@@ -13,11 +8,7 @@ class TopicDetailSerializer(serializers.ModelSerializer):
     is_done = serializers.SerializerMethodField(method_name='checker_for_done')
 
     def get_subtopic(self, obj):
-        out = []
-        subtopics = obj.subtopics.all()
-        for item in subtopics:
-            out.append(SubTopicSerializer(item).data)
-        return out
+        return SubTopicSerializer(obj.subtopics.all(), many=True).data
 
     def checker_for_done(self, obj):
         user = self.context.get('request').user
