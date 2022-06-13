@@ -9,7 +9,8 @@ class SubTopicSerializer(serializers.ModelSerializer):
 
 
 class TopicDetailSerializer(serializers.ModelSerializer):
-    subtopic = serializers.SerializerMethodField()
+    subtopic = serializers.SerializerMethodField(method_name='get_subtopic')
+    is_done = serializers.SerializerMethodField(method_name='checker_for_done')
 
     def get_subtopic(self, obj):
         out = []
@@ -18,12 +19,26 @@ class TopicDetailSerializer(serializers.ModelSerializer):
             out.append(SubTopicSerializer(item).data)
         return out
 
+    def checker_for_done(self, obj):
+        if obj.user_studies.all().count() > 0:
+            return True
+        else:
+            return False
+
     class Meta:
         model = Topic
-        fields = ['id', 'name', 'description', 'subtopic', 'image_url']
+        fields = ['id', 'name', 'description', 'subtopic', 'image_url', 'is_done']
 
 
 class TopicSerializer(serializers.ModelSerializer):
+    is_done = serializers.SerializerMethodField(method_name='checker_for_done')
+
+    def checker_for_done(self, obj):
+        if obj.user_studies.all().count() > 0:
+            return True
+        else:
+            return False
+
     class Meta:
         model = Topic
-        fields = ['id', 'name', 'description', ]
+        fields = ['id', 'name', 'description', 'is_done']
