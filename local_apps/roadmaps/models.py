@@ -40,6 +40,7 @@ class Topic(models.Model):
     description = models.TextField(blank=True)
     subtopics = models.ManyToManyField(Subtopic, related_name='topics')
     image = models.ImageField(upload_to='topics/', null=True, blank=True)
+    skills = models.ManyToManyField(Skill, blank=True)
 
     class Meta:
         ordering = ('name',)
@@ -61,7 +62,6 @@ class Topic(models.Model):
 class Technology(models.Model):
     name = models.CharField(max_length=200)
     description = models.TextField(blank=True)
-    skill = models.ManyToManyField(Skill, blank=True)
     topics = models.ManyToManyField(Topic, related_name='technologies')
 
     class Meta:
