@@ -128,3 +128,7 @@ class UserStudy(models.Model):
 
     def __str__(self):
         return f"{self.technology} | {self.user} | {self.progress}%"
+
+    @property
+    def tech_name(self):
+        return self.technology.name

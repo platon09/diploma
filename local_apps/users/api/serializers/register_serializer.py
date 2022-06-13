@@ -1,5 +1,6 @@
 from rest_framework import serializers
 from local_apps.users.models import Customer, Skill
+from local_apps.roadmaps.api.serializers.userstudy_serializer import UserStudySerializer
 
 
 class RegisterSerializer(serializers.ModelSerializer):
@@ -25,15 +26,16 @@ class SkillSerializer(serializers.ModelSerializer):
 
 # User serializer
 class UserSerializer(serializers.ModelSerializer):
-    skills = serializers.SerializerMethodField('get_skills_names')
+    skills = serializers.SerializerMethodField(method_name='get_skills_names')
+    user_studies = serializers.SerializerMethodField(method_name='get_user_studies')
 
     def get_skills_names(self, obj):
-        out = []
-        skills = obj.skill.all()
-        for item in skills:
-            out.append(SkillSerializer(item).data)
-        return out
+        return SkillSerializer(obj.skill.all(), many=True).data
+
+    def get_user_studies(self, obj):
+        return UserStudySerializer(obj.userstudies.all(), many=True).data
+
 
     class Meta:
         model = Customer
-        fields = ('id', 'first_name', 'last_name', 'email', 'bio', 'info', 'image_url', 'skills')
+        fields = ('id', 'first_name', 'last_name', 'email', 'bio', 'info', 'image_url', 'skills', 'user_studies')
