@@ -64,6 +64,7 @@ class Technology(models.Model):
     name = models.CharField(max_length=200)
     description = models.TextField(blank=True)
     topics = models.ManyToManyField(Topic, related_name='technologies')
+    image = models.ImageField(upload_to='techs/', null=True, blank=True)
 
     class Meta:
         ordering = ('name',)
