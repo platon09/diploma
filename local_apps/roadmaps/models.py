@@ -78,6 +78,13 @@ class Technology(models.Model):
     def __str__(self):
         return self.name
 
+    @property
+    def image_url(self):
+        try:
+            return BACKEND_URL + self.image.url
+        except:
+            return 'None'
+
 
 # Class model for IT specialization
 class Specialization(models.Model):
