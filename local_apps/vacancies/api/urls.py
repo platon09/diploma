@@ -1,5 +1,5 @@
 from django.urls import path
-from .api.views.vacancy_view import VacancyListView, VacancyDetailView
+from local_apps.vacancies.api.views.vacancy_view import VacancyListView, VacancyDetailView
 
 
 urlpatterns = [

@@ -1,5 +1,5 @@
 from django.urls import path
-from .api.views.recommendation_view import RecommendationListView, RecommendationDetailView
+from local_apps.recommendations.api.views.recommendation_view import RecommendationListView, RecommendationDetailView
 
 
 urlpatterns = [

@@ -7,10 +7,10 @@ from django.conf.urls.static import static
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('api/', include('local_apps.users.urls')),
-    path('api/roadmaps/', include('local_apps.roadmaps.urls')),
-    path('api/recs/', include('local_apps.recommendations.urls')),
-    path('api/vacancies/', include('local_apps.vacancies.urls')),
+    path('api/', include('local_apps.users.api.urls')),
+    path('api/roadmaps/', include('local_apps.roadmaps.api.urls')),
+    path('api/recs/', include('local_apps.recommendations.api.urls')),
+    path('api/vacancies/', include('local_apps.vacancies.api.urls')),
     path('api/docs/', include_docs_urls(
         title='API documentation'
     )),
