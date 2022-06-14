@@ -20,7 +20,8 @@ class RecordProgressView(APIView):
     permission_classes = (IsAuthenticated,)
 
     def get(self, request, **kwargs):
-        is_done = json.loads(request.query_params.get('done'))
+        # TODO әзірше аламын, бірақ кейін қосамын
+        # is_done = json.loads(request.query_params.get('done'))
         customer = request.user
         tech_id = kwargs['tech_id']
         topic_id = kwargs['topic_id']
@@ -28,5 +29,5 @@ class RecordProgressView(APIView):
         tech = Technology.objects.get(id=tech_id)
         topic = Topic.objects.get(id=topic_id)
 
-        response = UserStudy.objects.userstudy_progress(tech, topic, customer, is_done)
+        response = UserStudy.objects.userstudy_progress(tech, topic, customer, is_done=True)
         return response
