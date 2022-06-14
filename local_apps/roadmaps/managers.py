@@ -16,14 +16,13 @@ class RoadmapManager(models.Manager):
                 customer.skill.add(*topic.skills.all().values_list('id', flat=True))
                 userstudy.progress += percent
                 userstudy.save()
-                userstudy_progress = userstudy.progress
         else:
             if userstudy.progress > 0 and topic in topics:
                 userstudy.topics.remove(topic)
                 customer.skill.remove(*topic.skills.all().values_list('id', flat=True))
                 userstudy.progress -= percent
                 userstudy.save()
-                userstudy_progress = userstudy.progress
+        userstudy_progress = userstudy.progress
         return Response({
             "customer": customer.full_name,
             "email": customer.email,
