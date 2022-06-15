@@ -1,5 +1,5 @@
-from rest_framework.generics import ListAPIView, RetrieveAPIView
-from local_apps.vacancies.models import Vacancy
+from rest_framework.generics import ListAPIView, UpdateAPIView, RetrieveAPIView
+from local_apps.vacancies.models import Vacancy, FavouriteVacancy
 from local_apps.vacancies.api.serializers.vacancy_serializer import VacancySerializer
 
 from rest_framework import filters
@@ -8,12 +8,28 @@ from rest_framework.exceptions import ValidationError
 from rest_framework.response import Response
 
 
-class VacancyListView(ListAPIView):
+class VacancyListView(ListAPIView, UpdateAPIView):
     queryset = Vacancy.objects.all()
     serializer_class = VacancySerializer
     filter_backends = [filters.SearchFilter, filters.OrderingFilter]
     search_fields = ['title', 'description', 'employment_type', 'schedule', 'specialization', 'location', 'skill__name']
     ordering_fields = ['created_on', 'salary']
+
+    def update(self, request, *args, **kwargs):
+        customer = request.user
+        body = request.data
+        vacancy_id = body['vacancy_id']
+        flag = body['flag']
+
+        if flag:
+            query_response = FavouriteVacancy.objects.get_or_create(customer=customer)
+            favourite_vacancy = query_response[0]
+            is_new_fav_vacancy = query_response[1]
+            favourite_vacancies = favourite_vacancy.vacancy.all()
+            vacancy = Vacancy.objects.get(id=vacancy_id)
+
+            if vacancy in favourite_vacancies:
+                pass
 
 
 class VacancyDetailView(RetrieveAPIView):
