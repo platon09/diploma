@@ -1,5 +1,5 @@
 from django.db import models
-from local_apps.users.models import Skill
+from local_apps.users.models import Skill, Customer
 from config.settings import BACKEND_URL
 from django.utils.safestring import mark_safe
 
@@ -79,3 +79,15 @@ class Vacancy(models.Model):
             return BACKEND_URL + self.image.url
         except:
             return 'None'
+
+
+class FavouriteVacancy(models.Model):
+    customer = models.OneToOneField(Customer, related_name='favourite_vacancy', on_delete=models.CASCADE)
+    vacancy = models.ManyToManyField(Vacancy, related_name='favourite_vacancy')
+
+    class Meta:
+        verbose_name = 'Favourite Vacancy'
+        verbose_name_plural = 'Favourite Vacancies'
+
+    def __str__(self):
+        return f"{self.customer.email} favourite vacancies"
