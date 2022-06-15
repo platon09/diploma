@@ -19,7 +19,7 @@ class Skill(models.Model):
 
 class Customer(AbstractUser):
     email = models.EmailField(_('email address'), unique=True)
-    phone_number = models.CharField(max_length=20, blank=True)
+    phone_number = models.CharField(max_length=20, unique=True)
     bio = models.CharField(max_length=100, blank=True)
     info = models.TextField(blank=True)
     image = models.ImageField(upload_to='customers/', null=True, blank=True)
