@@ -22,14 +22,26 @@ class VacancyListView(ListAPIView, UpdateAPIView):
         flag = body['flag']
 
         if flag:
-            query_response = FavouriteVacancy.objects.get_or_create(customer=customer)
-            favourite_vacancy = query_response[0]
-            is_new_fav_vacancy = query_response[1]
-            favourite_vacancies = favourite_vacancy.vacancy.all()
+            favourite_vacancy = FavouriteVacancy.objects.get_or_create(customer=customer)[0]
             vacancy = Vacancy.objects.get(id=vacancy_id)
 
-            if vacancy in favourite_vacancies:
-                pass
+            if vacancy not in favourite_vacancy.vacancy.all():
+                favourite_vacancy.vacancy.add(vacancy)
+        else:
+            try:
+                favourite_vacancy = FavouriteVacancy.objects.get(customer=customer)
+                is_exists = True
+            except:
+                is_exists = False
+
+            if is_exists:
+                vacancy = Vacancy.objects.get(id=vacancy_id)
+                if vacancy in favourite_vacancy.vacancy.all():
+                    favourite_vacancy.vacancy.remove(vacancy)
+
+        queryset = Vacancy.objects.all()
+        serializer = self.get_serializer(queryset, many=True)
+        return Response(serializer.data)
 
 
 class VacancyDetailView(RetrieveAPIView):
