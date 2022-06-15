@@ -8,6 +8,7 @@ from local_apps.roadmaps.api.serializers.technology_serializer import Technology
 
 
 class TechnologyListView(ListAPIView):
+    permission_classes = (IsAuthenticated,)
     serializer_class = TechnologySerializer
 
     def get_queryset(self):
