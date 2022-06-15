@@ -44,7 +44,6 @@ class Topic(models.Model):
     skills = models.ManyToManyField(Skill, blank=True)
 
     class Meta:
-        ordering = ('-id',)
         verbose_name = 'Topic'
         verbose_name_plural = 'Topics'
 
