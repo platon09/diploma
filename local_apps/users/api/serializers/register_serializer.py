@@ -6,12 +6,13 @@ from local_apps.roadmaps.api.serializers.userstudy_serializer import UserStudySe
 class RegisterSerializer(serializers.ModelSerializer):
     class Meta:
         model = Customer
-        fields = ('first_name', 'last_name', 'email', 'password')
+        fields = ('first_name', 'last_name', 'email', 'phone_number', 'password')
         extra_kwargs = {'password': {'write_only': True}}
 
     def create(self, validated_data):
         user = Customer.objects.create_user(password=validated_data['password'],
                                             email=validated_data['email'],
+                                            phone_number=validated_data['phone_number'],
                                             first_name=validated_data['first_name'],
                                             last_name=validated_data['last_name'])
         return user
