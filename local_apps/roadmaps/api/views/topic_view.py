@@ -1,4 +1,5 @@
 from rest_framework.generics import ListAPIView, RetrieveAPIView
+from rest_framework.permissions import IsAuthenticated
 
 from local_apps.roadmaps.models import Topic, Technology, UserStudy
 from local_apps.roadmaps.api.serializers.topic_serializer import TopicDetailSerializer, TopicSerializer
@@ -16,6 +17,7 @@ class TopicDetailView(RetrieveAPIView):
 
 
 class TopicListView(ListAPIView):
+    permission_classes = (IsAuthenticated,)
     serializer_class = TopicSerializer
 
     def get_queryset(self):
