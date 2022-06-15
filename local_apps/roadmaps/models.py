@@ -113,7 +113,7 @@ class Specialization(models.Model):
 
 
 class UserStudy(models.Model):
-    technology = models.OneToOneField(Technology, on_delete=models.CASCADE)
+    technology = models.ForeignKey(Technology, related_name='userstudies', on_delete=models.CASCADE)
     topics = models.ManyToManyField(Topic, related_name='user_studies')
     progress = models.FloatField(default=0)
     user = models.ForeignKey(Customer, related_name='userstudies', on_delete=models.CASCADE)
